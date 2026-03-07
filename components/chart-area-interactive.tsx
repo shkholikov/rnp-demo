@@ -7,6 +7,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { ChartContainer, ChartLegend, ChartLegendContent, ChartTooltip, ChartTooltipContent, type ChartConfig } from "@/components/ui/chart";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
+import { formatTJS } from "@/lib/format";
 import { monthlyData } from "@/lib/sales-data";
 
 // Convert monthly data to daily data for the area chart (Revenue vs Cash)
@@ -114,12 +115,7 @@ export function ChartAreaInteractive() {
 											day: "numeric"
 										});
 									}}
-									formatter={(value) =>
-										`${Number(value).toLocaleString("ru-RU", {
-											minimumFractionDigits: 0,
-											maximumFractionDigits: 0
-										})} ₽`
-									}
+									formatter={(value) => formatTJS(Number(value))}
 									indicator="dot"
 								/>
 							}

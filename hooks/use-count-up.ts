@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 
+import { formatTJS } from "@/lib/format";
+
 type Format = "currency" | "number" | "percent" | "decimal" | "percentage";
 
 function easeOutQuart(t: number): number {
@@ -11,7 +13,7 @@ function easeOutQuart(t: number): number {
 function formatValue(value: number, format: Format): string {
 	switch (format) {
 		case "currency":
-			return `$${value.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+			return formatTJS(value);
 		case "number":
 			return Math.round(value).toLocaleString();
 		case "percent":
