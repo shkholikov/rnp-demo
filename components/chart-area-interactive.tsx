@@ -28,11 +28,11 @@ const chartData = monthlyData.flatMap((month, index) => {
 const chartConfig = {
 	revenue: {
 		label: "Выручка",
-		color: "var(--chart-1)"
+		color: "var(--chart-3)"
 	},
 	cashCollected: {
 		label: "Собранные деньги",
-		color: "var(--chart-2)"
+		color: "var(--chart-4)"
 	}
 } satisfies ChartConfig;
 

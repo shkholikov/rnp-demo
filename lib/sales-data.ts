@@ -1,4 +1,4 @@
-// Sales data for Page 1 - 3 months (Nov 2025, Dec 2025, Jan 2026)
+// Sales data for Page 1 — стройматериалы, 3 months (Nov 2025, Dec 2025, Jan 2026)
 
 export interface MonthlySalesData {
 	month: string;
@@ -39,6 +39,31 @@ export const monthlyData: MonthlySalesData[] = [
 		cashSales: 840000
 	}
 ];
+
+// Mock category-level margin data — категории стройматериалов (топ по марже / причины падения маржи)
+export interface CategoryMarginRow {
+	name: string;
+	marginPercent: number;
+	marginChangePp: number; // change in percentage points vs base period
+	revenue: number;
+}
+
+export const categoryMarginData: CategoryMarginRow[] = [
+	{ name: "Цемент и смеси", marginPercent: 16.8, marginChangePp: -5.2, revenue: 450000 },
+	{ name: "Арматура и металл", marginPercent: 19.5, marginChangePp: -4.1, revenue: 380000 },
+	{ name: "Пиломатериалы", marginPercent: 21.0, marginChangePp: -3.5, revenue: 320000 },
+	{ name: "Кровля и изоляция", marginPercent: 23.2, marginChangePp: -2.8, revenue: 280000 },
+	{ name: "Сантехника и электрика", marginPercent: 25.5, marginChangePp: -2.0, revenue: 240000 },
+	{ name: "Отделочные материалы", marginPercent: 27.0, marginChangePp: -1.2, revenue: 200000 },
+	{ name: "Инструменты", marginPercent: 30.5, marginChangePp: 0.5, revenue: 170000 }
+];
+
+/** Top categories by margin (worst margin first = main drivers of margin drop) */
+export function getTopCategoriesByMargin(limit = 6): CategoryMarginRow[] {
+	return [...categoryMarginData]
+		.sort((a, b) => a.marginPercent - b.marginPercent)
+		.slice(0, limit);
+}
 
 // Calculate derived metrics
 export function calculateMetrics(data: MonthlySalesData[]) {
