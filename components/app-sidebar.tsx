@@ -1,5 +1,6 @@
 import * as React from "react"
 import Link from "next/link"
+import { AlertCircle, Package, TrendingUp, Wallet } from "lucide-react"
 
 import { SearchForm } from "@/components/search-form"
 import { VersionSwitcher } from "@/components/version-switcher"
@@ -25,18 +26,22 @@ const data = {
         {
           title: "Продажи, наценка и рассрочка",
           url: "/sales",
+          icon: TrendingUp,
         },
         {
           title: "Просрочка. До 30 и более",
           url: "/overdue",
+          icon: AlertCircle,
         },
         {
           title: "Портфель рассрочки (Wallet)",
           url: "/portfolio",
+          icon: Wallet,
         },
         {
           title: "Продажи по номенклатуре и маржинальность",
           url: "/nomenclature",
+          icon: Package,
         },
       ],
     },
@@ -60,13 +65,19 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             <SidebarGroupLabel>{item.title}</SidebarGroupLabel>
             <SidebarGroupContent>
               <SidebarMenu>
-                {item.items.map((item) => (
-                  <SidebarMenuItem key={item.title}>
-                    <SidebarMenuButton asChild>
-                      <Link href={item.url}>{item.title}</Link>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                ))}
+                {item.items.map((navItem) => {
+                  const Icon = navItem.icon
+                  return (
+                    <SidebarMenuItem key={navItem.title}>
+                      <SidebarMenuButton asChild>
+                        <Link href={navItem.url}>
+                          <Icon className="size-4 shrink-0" />
+                          <span>{navItem.title}</span>
+                        </Link>
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
+                  )
+                })}
               </SidebarMenu>
             </SidebarGroupContent>
           </SidebarGroup>
